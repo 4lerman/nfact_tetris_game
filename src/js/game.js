@@ -7,13 +7,13 @@ ctx.canvas.height = ROWS * BLOCK_SIZE;
 ctx.scale(BLOCK_SIZE, BLOCK_SIZE);
 
 var tetrominoSequence = [];
-var playfield = [];
+var board = [];
 
 for (let row = -2; row < 20; row++) {
-	playfield[row] = [];
+	board[row] = [];
 
 	for (let col = 0; col < 10; col++) {
-		playfield[row][col] = 0;
+		board[row][col] = 0;
 	}
 }
 
@@ -51,7 +51,7 @@ function getNextBlock() {
 	const blockName = tetrominoSequence.pop();
 	const figure = blocks[blockName];
 
-	const fieldWidth = playfield[0].length;
+	const fieldWidth = board[0].length;
 	const matrixWidth = matrix[0].length;
 	const col = Math.floor((fieldWidth - matrixWidth) / 2);
 
