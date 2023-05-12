@@ -26,9 +26,9 @@ function getRandomInt(min, max) {
 }
 
 function generateBlockSequence() {
-	const figureSequence = ["stick", "square", "rT", "S", "Z", "L", "J"];
-	const shuffledBlocks = shuffleArray(figureSequence);
-	blockSequence.push(...shuffledBlocks);
+	const blockSequence = ["stick", "square", "rT", "S", "Z", "L", "J"];
+	const shuffledBlocks = shuffleArray(blockSequence);
+	tetrominoSequence.push(...shuffledBlocks);
 }
 
 function shuffleArray(array) {

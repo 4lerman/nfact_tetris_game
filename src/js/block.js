@@ -35,54 +35,59 @@ function canMove(figure, cellR, cellC) {
 }
 
 function getNextBlock() {
-	if (blockSequence.length === 0) {
+	if (tetrominoSequence.length === 0) {
 		generateBlockSequence();
 	}
 
-	const blockName = blockSequence.pop();
+	const blockName = tetrominoSequence.pop();
 	const figure = blocks[blockName];
 
 	const fieldWidth = board[0].length;
 	const matrixWidth = matrix[0].length;
 	const col = Math.floor((fieldWidth - matrixWidth) / 2);
 
-	const row = blockName === "stick" ? -1 : -2;
+    const row = blockName === 'I' ? -1 : -2;
 
-	return new blockInfo(blockName, figure, col, row);
+    return new blockInfo(blockName, figure, col, row);
 }
+
 
 function putBlock() {
 	for (let i = 0; i < block.matrix.length; i++) {
 		for (let j = 0; j < block.matrix[i].length; j++) {
 			if (block.matrix[i][j]) {
+				// если край фигуры после установки вылезает за границы поля, то игра закончилась
 				if (block.row + i < 0 || block.row + i >= board.length) {
 					return showGameOver();
 				}
+				// если всё в порядке, то записываем в массив игрового поля нашу фигуру
 				board[block.row + i][block.col + j] = block.name;
 			}
 		}
 	}
 
-	cleanLine();
+    cleanLine();
 
-	block = getNextBlock();
+    block = getNextBlock();
 }
 
 function cleanLine() {
-	let isRowFilled = true;
-	for (let cell of board[rowIndex]) {
-		if (!cell) {
-			isRowFilled = false;
-			break;
-		}
-	}
-	if (isRowFilled) {
-		for (let i = rowIndex; i >= 0; i--) {
-			for (let j = 0; j < board[i].length; j++) {
-				board[i][j] = i === 0 ? 0 : board[i - 1][j];
-			}
-		}
-	} else {
-		rowIndex--;
-	}
+    for (let rowIndex = board.length - 1; rowIndex >= 0; ) {
+        let rowIsFilled = true;
+        for (let c = 0; c < board[rowIndex].length; c++) {
+          if (!board[rowIndex][c]) {
+            rowIsFilled = false;
+            break;
+          }
+        }
+        if (rowIsFilled) {
+          for (let r = rowIndex; r >= 0; r--) {
+            for (let c = 0; c < board[r].length; c++) {
+              board[r][c] = r === 0 ? 0 : board[r-1][c];
+            }
+          }
+        } else {
+          rowIndex--;
+        }
+      }     
 }
