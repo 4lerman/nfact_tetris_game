@@ -26,17 +26,16 @@ function getRandomInt(min, max) {
 }
 
 function generateBlockSequence() {
-	const blockSequence = ["stick", "square", "rT", "S", "Z", "L", "J"];
-	const shuffledBlocks = shuffleArray(blockSequence);
-	tetrominoSequence.push(...shuffledBlocks);
+	const figureSequence = ["stick", "square", "rT", "S", "Z", "L", "J"];
+	const shuffledBlocks = shuffleArray(figureSequence);
+	blockSequence.push(...shuffledBlocks);
 }
 
 function shuffleArray(array) {
 	const shuffledArray = [...array];
 	for (let i = shuffledArray.length - 1; i > 0; i--) {
-		const j = (getRandomInt(0, array.length - 1)[
-			(shuffledArray[i], shuffledArray[j])
-		] = [shuffledArray[j], shuffledArray[i]]);
+		const j = getRandomInt(0, array.length - 1)
+        [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
 	}
 	return shuffledArray;
 }
