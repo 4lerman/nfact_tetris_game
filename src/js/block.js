@@ -34,6 +34,24 @@ function canMove(figure, cellR, cellC) {
 	return true;
 }
 
+function getNextBlock() {
+	if (tetrominoSequence.length === 0) {
+		generateBlockSequence();
+	}
+
+	const blockName = tetrominoSequence.pop();
+	const figure = blocks[blockName];
+
+	const fieldWidth = board[0].length;
+	const matrixWidth = matrix[0].length;
+	const col = Math.floor((fieldWidth - matrixWidth) / 2);
+
+    const row = blockName === 'I' ? -1 : -2;
+
+    return new blockInfo(blockName, figure, col, row);
+}
+
+
 function putBlock() {
 	for (let i = 0; i < block.matrix.length; i++) {
 		for (let j = 0; j < block.matrix[i].length; j++) {
