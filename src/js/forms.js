@@ -2,6 +2,8 @@ const COLS = 10;
 const ROWS = 20;
 const BLOCK_SIZE = 30;
 
+var tetrominoSequence = [];
+var board = [];
 
 const blocks = {
 	'stick': [

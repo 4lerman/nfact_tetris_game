@@ -6,8 +6,6 @@ ctx.canvas.height = ROWS * BLOCK_SIZE;
 
 ctx.scale(BLOCK_SIZE, BLOCK_SIZE);
 
-var tetrominoSequence = [];
-var board = [];
 
 for (let row = -2; row < 20; row++) {
 	board[row] = [];
