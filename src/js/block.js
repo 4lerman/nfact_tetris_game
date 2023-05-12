@@ -61,7 +61,7 @@ function putBlock() {
 					return showGameOver();
 				}
 				// если всё в порядке, то записываем в массив игрового поля нашу фигуру
-				playfield[block.row + i][block.col + j] = block.name;
+				board[block.row + i][block.col + j] = block.name;
 			}
 		}
 	}
