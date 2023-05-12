@@ -24,7 +24,7 @@ function canMove(figure, cellR, cellC) {
 				if (
 					cellC + j < 0 ||
 					cellC + j >= board[0].length ||
-					cellR + j >= board.length ||
+					cellR + i >= board.length ||
 					board[i + cellR][j + cellC]
 				) {
 					return false;
@@ -32,4 +32,41 @@ function canMove(figure, cellR, cellC) {
 		}
 	}
 	return true;
+}
+
+function putBlock() {
+	for (let i = 0; i < block.matrix.length; i++) {
+		for (let j = 0; j < block.matrix[i].length; j++) {
+			if (block.matrix[i][j]) {
+				// если край фигуры после установки вылезает за границы поля, то игра закончилась
+				if (block.row + i < 0 || block.row + i >= board.length) {
+					return showGameOver();
+				}
+				// если всё в порядке, то записываем в массив игрового поля нашу фигуру
+				playfield[block.row + i][block.col + j] = block.name;
+			}
+		}
+	}
+
+    cleanLine();
+
+    block = getNextBlock();
+}
+
+function cleanLine() {
+    for (let rowIndex = board.length - 1; rowIndex >= 0; ) {
+        // check if the row is completely filled
+        if (board[rowIndex].every(cell => !!cell)) {
+          // clear the row and move everything above it down by one cell
+          for (let r = rowIndex; r >= 0; r--) {
+            for (let c = 0; c < board[r].length; c++) {
+              board[r][c] = r === 0 ? 0 : board[r-1][c];
+            }
+          }
+        }
+        else {
+          // move on to the next row
+          rowIndex--;
+        }
+      }      
 }
