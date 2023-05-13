@@ -1,4 +1,4 @@
-<!--index.html-->
+
 <html>
 
 <head>
@@ -9,14 +9,13 @@
 <body>
 
     <div class="grid">
-        <canvas id="board" class="game-board"></canvas>
+        <canvas width="320" height="640" id="board" class="game-board"></canvas>
         <div class="right-column">
             <div>
                 <h1>TETRIS</h1>
                 <p>Score: <span id="score">0</span></p>
                 <p>Lines: <span id="lines">0</span></p>
                 <p>Level: <span id="level">0</span></p>
-                <canvas id="next" class="next"></canvas>
             </div>
             <button onclick="play()" class="play-button">Play</button>
         </div>
@@ -24,5 +23,6 @@
 
     <script type="text/javascript" src="src/js/forms.js"></script>
     <script type="text/javascript" src="src/js/block.js"></script>
+    <script type="text/javascript" src="src/js/keyboard.js"></script>
     <script type="text/javascript" src="src/js/game.js"></script>
 </body>

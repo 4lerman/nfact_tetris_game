@@ -1,8 +1,16 @@
-function blockInfo(name, figure, row, col) {
-	this.name = name;
-	this.figure = figure;
-	this.row = row;
-	this.col = col;
+const blockInfo = {
+	name: null,
+	figure: null,
+	col: null,
+	row: null
+}
+
+for (let row = -2; row < 20; row++) {
+	board[row] = [];
+
+	for (let col = 0; col < 10; col++) {
+		board[row][col] = 0;
+	}
 }
 
 function rotate(figure) {
@@ -15,6 +23,7 @@ function rotate(figure) {
 		}
 	}
 	return result;
+	
 }
 
 function canMove(figure, cellR, cellC) {
@@ -43,19 +52,24 @@ function getNextBlock() {
 	const figure = blocks[blockName];
 
 	const fieldWidth = board[0].length;
-	const matrixWidth = matrix[0].length;
-	const col = Math.floor((fieldWidth - matrixWidth) / 2);
+	const figureWidth = figure[0].length;
+	const col = Math.floor((fieldWidth - figureWidth) / 2);
 
     const row = blockName === 'stick' ? -1 : -2;
 
-    return new blockInfo(blockName, figure, col, row);
+	blockInfo.name = blockName;
+	blockInfo.figure = figure;
+	blockInfo.col = col;
+	blockInfo.row = row;
+
+	return blockInfo;
 }
 
 
 function putBlock() {
-	for (let i = 0; i < block.matrix.length; i++) {
-		for (let j = 0; j < block.matrix[i].length; j++) {
-			if (block.matrix[i][j]) {
+	for (let i = 0; i < block.figure.length; i++) {
+		for (let j = 0; j < block.figure[i].length; j++) {
+			if (block.figure[i][j]) {
 
 				if (block.row + i < 0 || block.row + i >= board.length) {
 					return showGameOver();
@@ -65,9 +79,9 @@ function putBlock() {
 			}
 		}
 	}
+	soundPlay('tetris-assets/sounds/Drop.wav');
 
     cleanLine();
-
     block = getNextBlock();
 }
 
@@ -86,8 +100,14 @@ function cleanLine() {
               board[r][c] = r === 0 ? 0 : board[r-1][c];
             }
           }
+		  soundPlay('tetris-assets/sounds/Lineclear.wav')
         } else {
           rowIndex--;
         }
       }     
+}
+
+function soundPlay(path) {
+	let audio = new Audio(path)
+	audio.play();
 }
