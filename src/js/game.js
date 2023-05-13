@@ -21,7 +21,7 @@ function generateBlockSequence() {
 }
 
 function loop() {
-	error = requestAnimationFrame(loop);
+	fRate = requestAnimationFrame(loop);
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 	for (let row = 0; row < 20; row++) {
@@ -66,6 +66,6 @@ function loop() {
 function play() {
 	if (!gameStarted) {
         gameStarted = true;
-		error = requestAnimationFrame(loop);
+		fRate = requestAnimationFrame(loop);
 	}
 }

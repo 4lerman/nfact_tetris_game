@@ -2,7 +2,7 @@ let blockSequence = [];
 let board = [];
 
 let count = 0;
-let error = null;
+let fRate = null;
 let gameOver = false;
 
 const blocks = {
@@ -54,7 +54,7 @@ const colors = {
 };
 
 function showGameOver() {
-	cancelAnimationFrame(error);
+	cancelAnimationFrame(fRate);
 	gameOver = true;
 	gameStarted = false;
 	ctx.fillStyle = "black";
