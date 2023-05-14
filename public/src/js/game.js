@@ -85,8 +85,6 @@ function soundPlay(path) {
 	audio.play();
 }
 
-//playButton.addEventListener('click', soundPlay('tetris-assets/sounds/Tetris.mp3'))
-
 
 function resetGame() {
     blockSequence = [];

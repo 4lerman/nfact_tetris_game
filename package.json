@@ -2,11 +2,16 @@
   "name": "nfact_tetris_game",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node main.js | open http://localhost:3000"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "browser": "chrome",
+  "dependencies": {
+    "express": "^4.18.2",
+    "path": "^0.12.7"
+  }
 }
