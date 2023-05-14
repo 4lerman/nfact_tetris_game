@@ -4,6 +4,7 @@ const ctx = canvas.getContext("2d");
 const grid = 32;
 let gameStarted = false;
 let block = getNextBlock();
+let tetrisAudioPlaying = false;
 
 function getRandomInt(min, max) {
 	const range = max - min + 1;
@@ -36,7 +37,7 @@ function loop() {
 	}
 
 	if (block) {
-		if (++count > 30) {
+		if (++count > speed) {
 			block.row++;
 			count = 0;
 
@@ -66,10 +67,26 @@ function loop() {
 function play() {
 	if (!gameStarted) {
         if(gameOver) resetGame();
+        if(!tetrisAudioPlaying) {
+            tetrisAudioPlaying = true;
+            soundPlay('tetris-assets/sounds/Tetris.mp3');
+        }
         gameStarted = true;
 		fRate = requestAnimationFrame(loop);
 	}
 }
+
+
+function soundPlay(path) {
+    audio = new Audio(path)
+    if(path == 'tetris-assets/sounds/Tetris.mp3') {
+        audio.loop = true;
+    }
+	audio.play();
+}
+
+//playButton.addEventListener('click', soundPlay('tetris-assets/sounds/Tetris.mp3'))
+
 
 function resetGame() {
     blockSequence = [];
@@ -78,9 +95,14 @@ function resetGame() {
     count = 0;
     fRate = null;
     gameOver = false;
-    lines.innerHTML = 0;
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    lines.innerHTML = 0;
+    score.innerHTML = 0;
+    level.innerHTML = 1;
+
+    speed = 30;
+    levelButtonClick = 0;
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     for (let row = -2; row < 20; row++) {
         board[row] = [];
@@ -91,4 +113,20 @@ function resetGame() {
     }
 
     block = getNextBlock();
+}
+
+
+function chooseLevel() {
+    if(!gameStarted){
+        if(levelButtonClick < 5) {
+            if(level.innerHTML == '1') level.innerHTML = parseInt(level.innerHTML) * 5;
+            else level.innerHTML = parseInt(level.innerHTML) + 5;
+            speed /= 1.5;
+            levelButtonClick++;
+        } else {
+            level.innerHTML = '1';
+            speed = 30;
+            levelButtonClick = 0;
+        }
+    }
 }

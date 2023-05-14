@@ -6,6 +6,11 @@ let fRate = null;
 let gameOver = false;
 let lines = document.querySelector('#lines');
 let score = document.querySelector('#score');
+let level = document.querySelector('#level')
+let speed = 30;
+let levelButtonClick = 0;
+let bestScore = document.querySelector('#best_score');
+let playButton = document.querySelector('#play_button')
 
 const blocks = {
 	'stick': [
@@ -59,6 +64,9 @@ function showGameOver() {
 	cancelAnimationFrame(fRate);
 	gameOver = true;
 	gameStarted = false;
+	if(bestScore.innerHTML < score.innerHTML) {
+		bestScore.innerHTML = score.innerHTML;
+	}
 
 	ctx.fillStyle = "black";
 	ctx.globalAlpha = 0.75;

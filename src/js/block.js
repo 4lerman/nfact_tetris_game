@@ -108,8 +108,3 @@ function cleanLine() {
         }
       }     
 }
-
-function soundPlay(path) {
-	let audio = new Audio(path)
-	audio.play();
-}
