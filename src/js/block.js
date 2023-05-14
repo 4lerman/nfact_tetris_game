@@ -100,6 +100,8 @@ function cleanLine() {
               board[r][c] = r === 0 ? 0 : board[r-1][c];
             }
           }
+		  score.innerHTML = parseInt(score.innerHTML) + 100;
+		  lines.innerHTML++;
 		  soundPlay('tetris-assets/sounds/Lineclear.wav')
         } else {
           rowIndex--;

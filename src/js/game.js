@@ -78,6 +78,7 @@ function resetGame() {
     count = 0;
     fRate = null;
     gameOver = false;
+    lines.innerHTML = 0;
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 

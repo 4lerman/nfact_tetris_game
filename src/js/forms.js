@@ -4,6 +4,8 @@ let board = [];
 let count = 0;
 let fRate = null;
 let gameOver = false;
+let lines = document.querySelector('#lines');
+let score = document.querySelector('#score');
 
 const blocks = {
 	'stick': [
@@ -57,6 +59,7 @@ function showGameOver() {
 	cancelAnimationFrame(fRate);
 	gameOver = true;
 	gameStarted = false;
+
 	ctx.fillStyle = "black";
 	ctx.globalAlpha = 0.75;
 	ctx.fillRect(0, canvas.height / 2 - 30, canvas.width, 60);
@@ -68,5 +71,4 @@ function showGameOver() {
 	ctx.fillText("GAME OVER!", canvas.width / 2, canvas.height / 2);
 	
 	soundPlay('tetris-assets/sounds/Gameover.wav')
-
 }
