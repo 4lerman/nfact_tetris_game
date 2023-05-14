@@ -65,7 +65,29 @@ function loop() {
 
 function play() {
 	if (!gameStarted) {
+        if(gameOver) resetGame();
         gameStarted = true;
 		fRate = requestAnimationFrame(loop);
 	}
+}
+
+function resetGame() {
+    blockSequence = [];
+    board = [];
+    
+    count = 0;
+    fRate = null;
+    gameOver = false;
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
+    for (let row = -2; row < 20; row++) {
+        board[row] = [];
+    
+        for (let col = 0; col < 10; col++) {
+            board[row][col] = 0;
+        }
+    }
+
+    block = getNextBlock();
 }
